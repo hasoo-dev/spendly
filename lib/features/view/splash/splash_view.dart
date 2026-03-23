@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:saypay/core/const/app_constant.dart';
- 
+import '../view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -11,67 +11,60 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _navigateToOnBoard();
-  // }
-
-  // void _navigateToOnBoard() async {
-  //   await Future.delayed(const Duration(seconds: 2), () {
-  //     if (mounted) {
-  //       Navigator.pushReplacement(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => const OnBoardView()),
-  //       );
-  //     }
-  //   });
-  // }
+  final splashservices = SplashServices();
+  @override
+  void initState() {
+    super.initState();
+    if (mounted) {
+      splashservices.navigateToNextScreen(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final view = View.of(context).display.size;
-    final size = view.height;
-    final width = view.width;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 140, 160, 205),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Positioned.fill(
-          //   child: Container(
-          //     decoration: const BoxDecoration(
-          //       gradient: RadialGradient(
-          //         colors: [
-          //           Colors.lightBlueAccent,
-          //           Colors.white,
-          //           Colors.lightBlueAccent
-
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          Center(
-            child: Column(
-              mainAxisAlignment: .center,
-              children: [
-                FittedBox(
-                  fit: BoxFit.cover,
-                  child: Image.asset(
-                    AppConstant.logo,
-                    height:  size *0.4,
-                    width: width/1,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: FadeIn(
+        delay: Duration(seconds: 2),
+        duration: Duration(seconds: 2),
+        child: SafeArea(
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: .center,
+                  children: [
+                    Image.asset(AppConstant.logo, width: 132),
+                    const SizedBox(height: 2),
+                    Text(
+                      AppConstant.appName,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 34,
+                        color: Theme.of(context).colorScheme.primaryFixed,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              //Branding Text for the app Spendly
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    AppConstant.branding,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontStyle: FontStyle.italic,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                Text("Say Pay", style: TextStyle(fontSize: 25)),
-              ],
-            ),
-          ).zoomIn(
-            duration: const Duration(seconds: 2),
-            curve: Curves.fastOutSlowIn,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

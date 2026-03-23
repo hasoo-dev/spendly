@@ -4,4 +4,5 @@ class RoutesConstant {
   static const String login = "/login";
   static const String signUp = "/signUp";
   static const String forgetPassword = "/forget";
+  static const String main = "/main";
 }

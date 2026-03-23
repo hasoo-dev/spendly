@@ -1,13 +1,27 @@
-import 'package:flutter/material.dart';
-
 class AppConstant {
   //Icons
-  static const String logo = 'assets/icons/ic_say_logo.png';
-//Colors
-static const Color PRIMARY = Color(0xFF3B5BDB); // Example Blue
-  static const Color SECONDARY = Color(0xFF748FFC);
-  static const Color BLACK = Color(0xFF1A1B1E);
-  static const Color WHITE = Color(0xFFFFFFFF);
-  static const Color BG_COLOR = Color(0xFF0A0E19); // The Logo Background Color
-  static const Color BODY_COLOR = Color(0xFF2C2E33);
+  static const String logo = 'assets/icons/ic_speedly.png';
+  //Text
+  static const String appName = 'Spendly';
+  static const String branding = "AI-powered expense\ntracking made simple";
 }
+
+//
+final List<Map<String, String>> onboardingData = [
+  {
+    "title": "Take Control of Your Money",
+    "subtitle":
+        "Track your daily expenses easily and stay in\ncontrol of your spending.",
+    "image": "assets/images/ic_onboard_1.png",
+  },
+  {
+    "title": "Just Speak Your Expenses",
+    "subtitle": "Say what you spent and Spendly will\nrecord it instantly.",
+    "image": "assets/images/ic_onboard_2.png",
+  },
+  {
+    "title": "Understand Your Spending",
+    "subtitle": "Get smart insights and see\nwhere your money goes.",
+    "image": "assets/images/ic_onboard_3.png",
+  },
+];

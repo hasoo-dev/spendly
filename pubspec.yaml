@@ -12,6 +12,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   device_preview:
   animate_do:
+  cached_network_image: ^3.4.1
+  flutter_secure_storage: ^10.0.0
+  another_flushbar: ^1.12.32
+  get: ^4.7.3
+  
 
 dev_dependencies:
   flutter_test:

@@ -1,30 +1,41 @@
-import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+import 'package:get/get.dart';
 import 'package:saypay/core/routes/routes_constant.dart';
- 
 import '../../features/view/view.dart';
 
-class Routes {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      //Splash
-      case RoutesConstant.splash:
-        return MaterialPageRoute(
-          builder: (BuildContext context) => const SplashView(),
-        );
-//OnBoard
-      case RoutesConstant.login:
-        return MaterialPageRoute(
-          builder: (BuildContext context) => const OnBoardView(),
-        );
+class AppRoutes {
+  static final routes = [
+    // Splash
+    GetPage(
+      name: RoutesConstant.splash,
+      page: () => const SplashView(),
+      transition: Transition.fadeIn, // Smooth entry for splash
+    ),
 
-      default:
-        return MaterialPageRoute(
-          builder: (_) {
-            return const Scaffold(
-              body: Center(child: Text('No route defined')),
-            );
-          },
-        );
-    }
-  }
+    // Onboarding
+    GetPage(
+      name: RoutesConstant.onBoard,
+      page: () => const OnBoardView(),
+    ),
+
+    // Auth / Login
+    GetPage(
+      name: RoutesConstant.login,
+      page: () => const AuthView(),
+      transition: Transition.rightToLeftWithFade,
+    ),
+
+    // Forget Password
+    GetPage(
+      name: RoutesConstant.forgetPassword,
+      page: () => const ForgetPasswordView(),
+    ),
+
+    // Main Dashboard
+    GetPage(
+      name: RoutesConstant.main,
+      page: () => const MainView(),
+      transition: Transition.zoom, // Nice pop-in effect for the main app
+    ),
+  ];
 }

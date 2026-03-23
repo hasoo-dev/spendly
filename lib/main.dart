@@ -1,15 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:saypay/app/say_pay.dart';
+import 'package:saypay/app/spendly.dart';
 import 'package:device_preview/device_preview.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // runApp(const SayPay());
-  runApp(
-    DevicePreview(
-    enabled: true,
-    
-    builder: (context) => const SayPay(),
-  )
-  );
+
+  runApp(const Spendly());
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => const Spendly(),
+  //   ),
+  // );
 }
