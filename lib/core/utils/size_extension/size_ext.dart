@@ -12,6 +12,10 @@ extension SizeExtension on num {
   // Usage: 0.1.w
   double get w => ui.window.physicalSize.width / ui.window.devicePixelRatio * (this);
 
+  // Scalable pixels for fonts and icons
+  // Usage: 12.sp
+  double get sp => this * (ui.window.physicalSize.width / ui.window.devicePixelRatio) / 414; // Default baseline width
+
   // Professional Vertical Spacer
   // Usage: 0.02.vSpace
   Widget get vSpace => SizedBox(height: this.h);

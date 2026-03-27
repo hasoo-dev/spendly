@@ -20,7 +20,7 @@ class LoginForm extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Form(
-        key: authService.formKey, // Use key from service
+        key: authService.form, // Use key from service
         child: Column(
           children: [
             CustomTextField(
@@ -44,10 +44,12 @@ class LoginForm extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomCheckbox(
+                Obx(() => CustomCheckbox(
                   label: "Remember me",
-                  onChanged: (value) => debugPrint("Remember me: $value"),
-                ),
+                  initialState: authService.isRememberMe.value,
+                  onChanged: (value) => authService.isRememberMe.value = value,
+                )),
+
                 InkWell(
                   onTap: () => Navigator.pushNamed(
                     context,
@@ -107,7 +109,7 @@ class LoginForm extends StatelessWidget {
                   SocialActionButton(
                     title: "Google",
                     iconPath: 'assets/icons/google.png',
-                    onTap: () => debugPrint("Google Login Pressed"),
+                    onTap: () => authService.signInWithGoogle(context),
                   ),
                   SocialActionButton(
                     title: "Facebook",

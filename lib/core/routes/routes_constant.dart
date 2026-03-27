@@ -5,4 +5,5 @@ class RoutesConstant {
   static const String signUp = "/signUp";
   static const String forgetPassword = "/forget";
   static const String main = "/main";
+  static const String editProfile = "/edit_profile";
 }

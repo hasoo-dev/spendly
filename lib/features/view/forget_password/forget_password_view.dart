@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:saypay/core/component/custom_form_field.dart';
 import 'package:saypay/core/component/text_actions.dart';
+import 'package:saypay/services/auth_services.dart/auth_services.dart';
 
 import '../../../core/const/app_constant.dart';
 import '../../../core/utils/validation_extension/validation.dart';
@@ -23,7 +25,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            Get.back();
           },
           child: Icon(Icons.arrow_back_ios),
         ),
@@ -83,29 +85,34 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   ),
                   child: Form(
                     key: formkey,
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                          controller: emailController,
-                          label: "Email Address",
-                          prefixIcon: Icons.email_outlined,
-                          validator: (value) => value.validateEmail(),
-                        ),
-                        const SizedBox(height: 22),
-                        TextActions(
-                          title: "Send Link",
-                          background: Theme.of(context).scaffoldBackgroundColor,
-                          titleColor: Colors.black,
-                          fontSize: 14,
-                          onTap: () {
-                            if (formkey.currentState!.validate()) {
-                              print("Form is valid. Proceeding to login...");
-                            } else {
-                              print("Form has errors.");
-                            }
-                          },
-                        ),
-                      ],
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          CustomTextField(
+                            controller: emailController,
+                            label: "Email Address",
+                            prefixIcon: Icons.email_outlined,
+                            validator: (value) => value.validateEmail(),
+                          ),
+                          const SizedBox(height: 22),
+                          TextActions(
+                            title: "Send Link",
+                            background: Theme.of(context).scaffoldBackgroundColor,
+                            titleColor: Colors.black,
+                            fontSize: 14,
+                            onTap: () {
+                              if (formkey.currentState!.validate()) {
+                                Get.find<AuthService>().sendPasswordReset(
+                                  context, 
+                                  emailController.text.trim(),
+                                );
+                              } else {
+                                print("Form has errors.");
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

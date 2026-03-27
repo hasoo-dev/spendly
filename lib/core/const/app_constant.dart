@@ -1,6 +1,9 @@
 class AppConstant {
   //Icons
   static const String logo = 'assets/icons/ic_speedly.png';
+  //animation
+  static const String loading = 'assets/animation/ic_mic.json';
+  static const String profile = 'assets/icons/ic_profile.png';
   //Text
   static const String appName = 'Spendly';
   static const String branding = "AI-powered expense\ntracking made simple";

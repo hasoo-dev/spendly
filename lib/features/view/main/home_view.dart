@@ -11,7 +11,20 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
+      extendBody: true,
+      body: Column(
+        mainAxisAlignment: .center,
+        children: [
+           Center(
+            child: Text("Home",style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),),
+           )
+        ],
+      ),
     );
   }
 }

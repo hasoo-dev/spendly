@@ -15,13 +15,9 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  final formKey = GlobalKey<FormState>();
-  final fullNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-   final AuthService authServices = Get.find<AuthService>();
+    final AuthService authServices = Get.find<AuthService>();
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 0.06.w),
       child: Form(
@@ -29,7 +25,7 @@ class _RegisterFormState extends State<RegisterForm> {
         child: Column(
           children: [
             CustomTextField(
-              controller: authServices.fullNameController,
+              controller: authServices.registerFullNameController,
               label: "Full Name",
               prefixIcon: Icons.person,
               keyword: TextInputType.name,
@@ -37,7 +33,7 @@ class _RegisterFormState extends State<RegisterForm> {
               validator: (value) => value.validateFullName(),
             ),
             CustomTextField(
-              controller: authServices.emailController,
+              controller: authServices.registerEmailController,
               label: "Email Address",
               prefixIcon: Icons.email_outlined,
               keyword: TextInputType.emailAddress,
@@ -45,12 +41,12 @@ class _RegisterFormState extends State<RegisterForm> {
               isPassword: false,
             ),
             CustomTextField(
-              controller: authServices.passwordController,
+              controller: authServices.registerPasswordController,
 
               label: "Password",
               prefixIcon: Icons.lock_outline,
               isPassword: true,
-               
+
               action: TextInputAction.done,
               validator: (value) => value.validatePassword(),
             ),

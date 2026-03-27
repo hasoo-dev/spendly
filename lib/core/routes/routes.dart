@@ -37,5 +37,10 @@ class AppRoutes {
       page: () => const MainView(),
       transition: Transition.zoom, // Nice pop-in effect for the main app
     ),
+
+    GetPage(
+      name: RoutesConstant.editProfile,
+      page: () => const EditProfileView(),
+    ),
   ];
 }

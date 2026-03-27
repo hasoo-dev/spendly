@@ -4,3 +4,4 @@ export '../../../services/splash_services/splash_services.dart';
 export 'auth/auth_view.dart';
 export 'forget_password/forget_password_view.dart';
 export 'main/main_view.dart';
+export 'profile_parts/edit_profile_view.dart';

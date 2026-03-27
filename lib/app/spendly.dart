@@ -6,6 +6,8 @@ import 'package:saypay/core/routes/routes.dart';
 import 'package:saypay/core/routes/routes_constant.dart';
 import 'package:saypay/core/theme/theme.dart';
 
+import '../core/const/app_binding.dart';
+
 class Spendly extends StatelessWidget {
   const Spendly({super.key});
 
@@ -14,18 +16,18 @@ class Spendly extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Spendly",
-      
+
       // Theme Configuration
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.light,
+      initialBinding: AppBinding(),
 
       // Routing Configuration (The GetX Way)
       initialRoute: RoutesConstant.splash,
       getPages: AppRoutes.routes, // This replaces onGenerateRoute
-      
       // Default transition for a premium feel
-      defaultTransition: Transition.cupertino, 
+      defaultTransition: Transition.cupertino,
     );
   }
 }
