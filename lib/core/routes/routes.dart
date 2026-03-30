@@ -42,5 +42,30 @@ class AppRoutes {
       name: RoutesConstant.editProfile,
       page: () => const EditProfileView(),
     ),
+    GetPage(
+      name: RoutesConstant.changePassword,
+      page: () => const ChangePasswordView(),
+    ),
+    GetPage(
+      name: RoutesConstant.theme,
+      page: () => const ThemeToogle(),
+    ),
+    GetPage(
+      name: RoutesConstant.currency,
+      page: () => const Currency(),
+    ),
+    GetPage(
+      name: RoutesConstant.exportData,
+      page: () => const ExportData(),
+    ),
+    GetPage(
+      name: RoutesConstant.backup,
+      page: () => const Backup(),
+    ),
+    GetPage(
+      name: RoutesConstant.aboutSpendly,
+      page: () => const AboutSpendly(),
+    ),
+    
   ];
 }

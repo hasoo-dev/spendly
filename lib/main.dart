@@ -11,11 +11,11 @@ void main() async {
     anonKey: 'sb_publishable_3w-cR_SmmjPo7v59CBZBvw_kbgj2WL6',
   );
 
-  runApp(const Spendly());
-  // runApp(
-  //   DevicePreview(
-  //     enabled: !kReleaseMode,
-  //     builder: (context) => const Spendly(),
-  //   ),
-  // );
+  // runApp(const Spendly());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const Spendly(),
+    ),
+  );
 }

@@ -206,54 +206,54 @@ class AuthRepository {
   }
 
   /// Upload profile image to Supabase Storage and update user metadata
-  Future<String> uploadProfileImage(dynamic file, String userId) async {
-    try {
-      AppLogger.auth('Attempting to upload profile image for user: $userId');
+  // Future<String> uploadProfileImage(dynamic file, String userId) async {
+  //   try {
+  //     AppLogger.auth('Attempting to upload profile image for user: $userId');
 
-      final String fileExt = file.path.split('.').last;
-      final String fileName =
-          '${DateTime.now().millisecondsSinceEpoch}.$fileExt';
+  //     final String fileExt = file.path.split('.').last;
+  //     final String fileName =
+  //         '${DateTime.now().millisecondsSinceEpoch}.$fileExt';
 
-      // ✅ Path starts with userId as the first folder
-      final String path = '$userId/$fileName';
+  //     // ✅ Path starts with userId as the first folder
+  //     final String path = '$userId/$fileName';
 
-      await _supabase.storage
-          .from('profile_image')
-          .upload(
-            path, // = 'userId/timestamp.jpg'  ✅
-            file,
-            fileOptions: const sup.FileOptions(
-              cacheControl: '3600',
-              upsert: true,
-            ),
-          );
+  //     await _supabase.storage
+  //         .from('profile_image')
+  //         .upload(
+  //           path, // = 'userId/timestamp.jpg'  ✅
+  //           file,
+  //           fileOptions: const sup.FileOptions(
+  //             cacheControl: '3600',
+  //             upsert: true,
+  //           ),
+  //         );
 
-      final String publicUrl = _supabase.storage
-          .from('profile_image')
-          .getPublicUrl(path);
+  //     final String publicUrl = _supabase.storage
+  //         .from('profile_image')
+  //         .getPublicUrl(path);
 
-      await _supabase.auth.updateUser(
-        sup.UserAttributes(data: {'avatar_url': publicUrl}),
-      );
+  //     await _supabase.auth.updateUser(
+  //       sup.UserAttributes(data: {'avatar_url': publicUrl}),
+  //     );
 
-      AppLogger.success('Profile image uploaded: $publicUrl', tag: 'AUTH');
-      return publicUrl;
-    } on sup.StorageException catch (e) {
-      AppLogger.error(
-        'Storage error uploading profile image',
-        error: e,
-        tag: 'AUTH',
-      );
-      throw AuthException(e.message);
-    } catch (e) {
-      AppLogger.error(
-        'Unexpected error uploading profile image',
-        error: e,
-        tag: 'AUTH',
-      );
-      throw AuthException(e.toString());
-    }
-  }
+  //     AppLogger.success('Profile image uploaded: $publicUrl', tag: 'AUTH');
+  //     return publicUrl;
+  //   } on sup.StorageException catch (e) {
+  //     AppLogger.error(
+  //       'Storage error uploading profile image',
+  //       error: e,
+  //       tag: 'AUTH',
+  //     );
+  //     throw AuthException(e.message);
+  //   } catch (e) {
+  //     AppLogger.error(
+  //       'Unexpected error uploading profile image',
+  //       error: e,
+  //       tag: 'AUTH',
+  //     );
+  //     throw AuthException(e.toString());
+  //   }
+  // }
 
   /// Get current user session
   sup.User? get currentUser => _supabase.auth.currentUser;
@@ -261,5 +261,32 @@ class AuthRepository {
   /// Check if user is logged in
   bool get isAuthenticated => _supabase.auth.currentSession != null;
 
-  
+  /// Update user password
+  Future<void> updatePassword(String newPassword) async {
+    try {
+      AppLogger.auth('Attempting to update password for current user');
+      
+      await _supabase.auth.updateUser(
+        sup.UserAttributes(
+          password: newPassword,
+        ),
+      );
+      
+      AppLogger.success('Password updated successfully', tag: 'AUTH');
+    } on sup.AuthException catch (e) {
+      AppLogger.error(
+        'Supabase Auth error during password update',
+        error: e,
+        tag: 'AUTH',
+      );
+      throw AuthException(e.message);
+    } catch (e) {
+      AppLogger.error(
+        'Unexpected error during password update',
+        error: e,
+        tag: 'AUTH',
+      );
+      throw AuthException(e.toString());
+    }
+  }
 }
